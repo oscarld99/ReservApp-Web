@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReservApp — Reserva tu escenario deportivo</title>
+  <meta name="description" content="ReservApp conecta deportistas con escenarios deportivos en el Atlántico, Colombia. Busca, reserva y disfruta tu cancha favorita." />
+  <meta property="og:title" content="ReservApp — Reserva tu escenario deportivo" />
+  <meta property="og:description" content="La app para reservar canchas y escenarios deportivos en Barranquilla y el Atlántico." />
+  <meta property="og:image" content="screens/og-image.png" />
+  <link rel="icon" href="screens/favicon.png" />
+
+  <style>
+    /* ── Reset ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+      color: #212121;
+      background: #fff;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; }
+
+    /* ── Tokens ──────────────────────────────────────────────── */
+    :root {
+      --primary:       #2E7D32;
+      --primary-dark:  #1B5E20;
+      --primary-light: #66BB6A;
+      --primary-bg:    #F1F8E9;
+      --text:          #212121;
+      --text-muted:    #757575;
+      --border:        #E0E0E0;
+      --white:         #FFFFFF;
+    }
+
+    /* ── Helpers ─────────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 50px; font-weight: 700;
+      font-size: 1rem; cursor: pointer; transition: all .2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--primary); color: var(--white);
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46,125,50,.35); }
+    .btn-outline {
+      background: transparent; color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .btn-outline:hover { background: var(--primary-bg); }
+    .tag {
+      display: inline-block; background: var(--primary-bg);
+      color: var(--primary); font-size: .75rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 50px; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 2rem; font-weight: 800; color: var(--text);
+      margin-bottom: 12px; line-height: 1.25;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--text-muted);
+      max-width: 560px; margin: 0 auto 48px;
+    }
+    .text-center { text-align: center; }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: var(--primary);
+      border-radius: 10px; display: flex; align-items: center;
+      justify-content: center; color: #fff; font-weight: 900;
+      font-size: 1.1rem;
+    }
+    .nav-logo-name {
+      font-size: 1.2rem; font-weight: 800; color: var(--primary-dark);
+    }
+    .nav-links {
+      display: flex; gap: 24px; align-items: center;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted); font-weight: 500; font-size: .95rem;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 80px 0 60px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 60px;
+      background: var(--white);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    }
+    .hero-badge {
+      display: inline-block; background: rgba(255,255,255,.2);
+      color: #fff; font-size: .8rem; font-weight: 700;
+      padding: 4px 14px; border-radius: 50px; margin-bottom: 20px;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 3rem; font-weight: 900; line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--primary-light); }
+    .hero p {
+      font-size: 1.1rem; opacity: .9; margin-bottom: 36px;
+      max-width: 480px;
+    }
+    @media (max-width: 768px) { .hero p { margin: 0 auto 36px; } }
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    @media (max-width: 768px) { .hero-buttons { justify-content: center; } }
+    .btn-dark {
+      background: rgba(255,255,255,.15);
+      color: #fff; border: 2px solid rgba(255,255,255,.4);
+      backdrop-filter: blur(4px);
+    }
+    .btn-dark:hover { background: rgba(255,255,255,.25); }
+    .btn-white { background: #fff; color: var(--primary); }
+    .btn-white:hover { background: var(--primary-bg); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.15); }
+
+    /* Hero phone mockups */
+    .hero-phones {
+      display: flex; justify-content: center; gap: 16px;
+      position: relative; align-items: center;
+    }
+    .phone-img {
+      width: 155px; border-radius: 28px;
+      box-shadow: 0 24px 48px rgba(0,0,0,.4), 0 0 0 2px rgba(255,255,255,.2);
+    }
+    .hero-phones .phone-img:first-child {
+      transform: translateY(24px) rotate(-4deg);
+    }
+    .hero-phones .phone-img:last-child {
+      transform: translateY(-8px) rotate(3deg);
+    }
+
+    /* ── CITIES STRIP ────────────────────────────────────────── */
+    .cities {
+      background: var(--primary-bg);
+      padding: 20px 0;
+      text-align: center;
+    }
+    .cities p {
+      font-size: .9rem; color: var(--text-muted);
+      font-weight: 500;
+    }
+    .cities span { color: var(--primary); font-weight: 700; }
+
+    /* ── FEATURES ────────────────────────────────────────────── */
+    .features { padding: 80px 0; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px; margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px;
+      transition: all .25s;
+    }
+    .feature-card:hover {
+      border-color: var(--primary-light);
+      box-shadow: 0 8px 32px rgba(46,125,50,.1);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 52px; height: 52px; background: var(--primary-bg);
+      border-radius: 14px; display: flex; align-items: center;
+      justify-content: center; font-size: 1.5rem; margin-bottom: 18px;
+    }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: .95rem; color: var(--text-muted); }
+
+    /* ── SCREENSHOTS ─────────────────────────────────────────── */
+    .screenshots { padding: 80px 0; background: var(--primary-bg); }
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px; margin-top: 48px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .screenshots-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .screenshot-real {
+      border-radius: 24px;
+      width: 100%;
+      box-shadow: 0 16px 40px rgba(0,0,0,.14);
+      transition: transform .25s;
+    }
+    .screenshot-real:hover { transform: translateY(-6px); }
+
+    /* ── HOW IT WORKS ────────────────────────────────────────── */
+    .how { padding: 80px 0; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px; margin-top: 48px; position: relative;
+    }
+    .step { text-align: center; }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      font-size: 1.2rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h3 { font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: .9rem; color: var(--text-muted); }
+
+    /* ── DOWNLOAD ────────────────────────────────────────────── */
+    .download {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff; text-align: center;
+    }
+    .download h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; }
+    .download p { font-size: 1.05rem; opacity: .85; margin-bottom: 36px; }
+    .download-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .store-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,.15);
+      border: 2px solid rgba(255,255,255,.35);
+      color: #fff; padding: 14px 24px; border-radius: 14px;
+      transition: all .2s; cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+    .store-btn:hover { background: rgba(255,255,255,.25); transform: translateY(-2px); }
+    .store-btn-icon { font-size: 1.8rem; }
+    .store-btn-text { text-align: left; }
+    .store-btn-text small { display: block; font-size: .7rem; opacity: .8; }
+    .store-btn-text strong { font-size: 1rem; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--primary-dark); color: rgba(255,255,255,.8);
+      padding: 48px 0 28px;
+    }
+    .footer-inner {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 640px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+    .footer-brand p { font-size: .9rem; margin-top: 10px; opacity: .7; max-width: 260px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo-icon {
+      width: 32px; height: 32px; background: rgba(255,255,255,.15);
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-weight: 900; color: #fff;
+    }
+    .footer-logo-name { font-weight: 800; font-size: 1.1rem; color: #fff; }
+    .footer-col h4 {
+      font-size: .8rem; text-transform: uppercase; letter-spacing: .08em;
+      color: var(--primary-light); font-weight: 700; margin-bottom: 14px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,.7); font-size: .9rem; transition: color .15s;
+    }
+    .footer-col ul li a:hover { color: var(--primary-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px; font-size: .82rem; opacity: .6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">R</div>
+        <span class="nav-logo-name">ReservApp</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#caracteristicas">Características</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#descargar">Descargar</a></li>
+      </ul>
+      <a href="#descargar" class="btn btn-primary" style="padding:10px 22px;font-size:.9rem;">
+        Descargar gratis
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="hero-badge">📍 Atlántico, Colombia</span>
+        <h1>Tu <span>escenario</span><br>deportivo,<br>a un tap</h1>
+        <p>
+          Busca, reserva y disfruta canchas y escenarios deportivos en
+          Barranquilla, Soledad, Puerto Colombia y Malambo. Rápido, fácil y gratuito.
+        </p>
+        <div class="hero-buttons">
+          <a href="#descargar" class="btn btn-white">
+            📲 Descargar APK
+          </a>
+          <a href="#como-funciona" class="btn btn-dark">
+            Ver cómo funciona
+          </a>
+        </div>
+      </div>
+      <div class="hero-phones">
+        <img src="screens/screenshot-home.png" class="phone-img" alt="ReservApp — Home" />
+        <img src="screens/screenshot-venues.png" class="phone-img" alt="ReservApp — Escenarios" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STRIP CIUDADES ────────────────────────────────────── -->
+  <div class="cities">
+    <p>
+      Disponible en
+      <span>Barranquilla · Soledad · Puerto Colombia · Malambo</span>
+    </p>
+  </div>
+
+  <!-- ── CARACTERÍSTICAS ──────────────────────────────────── -->
+  <section class="features" id="caracteristicas">
+    <div class="container text-center">
+      <span class="tag">Funcionalidades</span>
+      <h2 class="section-title">Todo lo que necesitas<br>para tu deporte</h2>
+      <p class="section-sub">
+        ReservApp centraliza la búsqueda de escenarios, la gestión de reservas
+        y la comunidad deportiva en una sola aplicación.
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Busca y filtra</h3>
+          <p>Encuentra canchas por deporte, ciudad, precio y servicios disponibles. Con mapa interactivo.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>Reserva en segundos</h3>
+          <p>Elige fecha, selecciona tu franja horaria y confirma. Sin llamadas, sin esperas.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚽</div>
+          <h3>Eventos deportivos</h3>
+          <p>Crea o únete a partidos, torneos y encuentros. Encuentra rivales y compañeros de juego.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏅</div>
+          <h3>Profesionales del deporte</h3>
+          <p>Contacta instructores, árbitros y preparadores físicos certificados en tu ciudad.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📸</div>
+          <h3>Comunidad social</h3>
+          <p>Comparte tus mejores momentos deportivos, sigue a otros jugadores y escenarios.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏟️</div>
+          <h3>Panel de administrador</h3>
+          <p>Gestiona tu escenario, confirma reservas y visualiza métricas en tiempo real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCREENSHOTS ───────────────────────────────────────── -->
+  <section class="screenshots">
+    <div class="container text-center">
+      <span class="tag">La app</span>
+      <h2 class="section-title">Diseñada para el deporte colombiano</h2>
+      <p class="section-sub">
+        Una experiencia simple e intuitiva para deportistas y administradores de escenarios.
+      </p>
+      <div class="screenshots-grid">
+        <img src="screens/screenshot-home.png"    class="screenshot-real" alt="ReservApp — Inicio y feed" />
+        <img src="screens/screenshot-venues.png"  class="screenshot-real" alt="ReservApp — Escenarios" />
+        <img src="screens/screenshot-map.png"     class="screenshot-real" alt="ReservApp — Mapa interactivo" />
+        <img src="screens/screenshot-booking.png" class="screenshot-real" alt="ReservApp — Mis reservas" />
+        <img src="screens/screenshot-admin.png"   class="screenshot-real" alt="ReservApp — Dashboard administrador" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CÓMO FUNCIONA ─────────────────────────────────────── -->
+  <section class="how" id="como-funciona">
+    <div class="container text-center">
+      <span class="tag">Proceso</span>
+      <h2 class="section-title">Reserva en 3 pasos</h2>
+      <p class="section-sub">
+        Sin complicaciones. Desde la búsqueda hasta la confirmación en menos de un minuto.
+      </p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Busca tu cancha</h3>
+          <p>Filtra por deporte, ciudad y precio. Consulta fotos, horarios y servicios disponibles.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Elige fecha y hora</h3>
+          <p>Selecciona el horario disponible que más te convenga. Ve el precio en tiempo real.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>¡Listo a jugar!</h3>
+          <p>Confirma tu reserva y coordina el pago directamente con el escenario. Sin intermediarios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DESCARGA ──────────────────────────────────────────── -->
+  <section class="download" id="descargar">
+    <div class="container">
+      <h2>Descarga ReservApp gratis</h2>
+      <p>Disponible para Android. Próximamente en iOS.</p>
+      <div class="download-buttons">
+
+        <!-- Android APK directo -->
+        <a href="https://expo.dev/accounts/oscarld99/projects/reservapp/builds/f71458c1-a0f1-440e-a4e8-9ef5620f018c"
+           class="store-btn" target="_blank" rel="noopener">
+          <span class="store-btn-icon">🤖</span>
+          <span class="store-btn-text">
+            <small>Descarga directa</small>
+            <strong>Android APK</strong>
+          </span>
+        </a>
+
+        <!-- Google Play (próximamente) -->
+        <span class="store-btn" style="opacity:.5;cursor:not-allowed;">
+          <span class="store-btn-icon">▶</span>
+          <span class="store-btn-text">
+            <small>Próximamente</small>
+            <strong>Google Play</strong>
+          </span>
+        </span>
+
+        <!-- App Store (próximamente) -->
+        <span class="store-btn" style="opacity:.5;cursor:not-allowed;">
+          <span class="store-btn-icon"></span>
+          <span class="store-btn-text">
+            <small>Próximamente</small>
+            <strong>App Store</strong>
+          </span>
+        </span>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">R</div>
+            <span class="footer-logo-name">ReservApp</span>
+          </div>
+          <p>La plataforma para reservar escenarios deportivos en el Atlántico, Colombia.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="docs/politica-privacidad">Política de Privacidad</a></li>
+            <li><a href="docs/terminos-condiciones">Términos y Condiciones</a></li>
+            <li><a href="docs/politica-cookies">Política de Cookies</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:oscardavidloradesales@gmail.com">Soporte</a></li>
+            <li><a href="mailto:oscardavidloradesales@gmail.com">Registrar escenario</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Oscar David Lora De Sales. Todos los derechos reservados.</span>
+        <span>Hecho con 💚 para el deporte colombiano · Atlántico 🇨🇴</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
