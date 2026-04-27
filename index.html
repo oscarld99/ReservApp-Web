@@ -274,10 +274,13 @@
       padding: 48px 0 28px;
     }
     .footer-inner {
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
       margin-bottom: 40px;
     }
-    @media (max-width: 640px) {
+    @media (max-width: 800px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
       .footer-inner { grid-template-columns: 1fr; }
     }
     .footer-brand p { font-size: .9rem; margin-top: 10px; opacity: .7; max-width: 260px; }
@@ -500,6 +503,15 @@
             <span class="footer-logo-name">ReservApp</span>
           </div>
           <p>La plataforma para reservar escenarios deportivos en el Atlántico, Colombia.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="docs/faq">Preguntas frecuentes</a></li>
+            <li><a href="docs/manual-deportista">Manual deportista</a></li>
+            <li><a href="docs/manual-administrador">Manual administrador</a></li>
+          </ul>
         </div>
 
         <div class="footer-col">
