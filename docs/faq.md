@@ -86,6 +86,28 @@ Sí, puedes tener múltiples reservas activas en diferentes escenarios.
 
 ---
 
+## Ofertas Relámpago ⚡
+
+**¿Qué es una Oferta Relámpago?**
+Es un horario disponible que el administrador del escenario publica a precio especial por tiempo limitado. Aparece destacada en la pantalla de inicio de la app con un contador regresivo.
+
+**¿Dónde veo las ofertas disponibles?**
+En la pantalla de **Inicio**, pestaña "Feed", en la sección "Ofertas Relámpago ⚡" al tope del contenido. También puedes ver el descuento directamente en el selector de horas al reservar ese escenario.
+
+**¿Por cuánto tiempo está disponible una oferta?**
+Depende del administrador. Puede ser desde 1 hora hasta 12 horas. El contador en la card te muestra el tiempo restante exacto.
+
+**¿Puedo reservar una Oferta Relámpago igual que una reserva normal?**
+Sí. Al tocar la oferta llegas al escenario. Al seleccionar el horario verás el ⚡ dorado en el slot y el precio especial aplicado. La confirmación muestra el ahorro en pesos.
+
+**Soy administrador, ¿cómo publico una Oferta Relámpago?**
+Ve a **Mis Escenarios → detalle del escenario → botón ⚡ (dorado)** → toca **+ Nueva** y completa el formulario con el horario, precio especial y duración.
+
+**¿Qué pasa si la oferta no fue reclamada?**
+Vence automáticamente cuando se acaba el tiempo. No afecta el funcionamiento normal del escenario.
+
+---
+
 ## Pagos
 
 **¿ReservApp cobra comisión por las reservas?**

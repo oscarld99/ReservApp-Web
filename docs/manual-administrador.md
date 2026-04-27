@@ -20,9 +20,10 @@ Como administrador de escenario en ReservApp puedes:
 2. [Dashboard](#2-dashboard)
 3. [Gestionar mis escenarios](#3-gestionar-mis-escenarios)
 4. [Reservas](#4-reservas)
-5. [Configuración del negocio](#5-configuración-del-negocio)
-6. [Perfil de administrador](#6-perfil-de-administrador)
-7. [Notificaciones](#7-notificaciones)
+5. [Ofertas Relámpago ⚡](#5-ofertas-relámpago-)
+6. [Configuración del negocio](#6-configuración-del-negocio)
+7. [Perfil de administrador](#7-perfil-de-administrador)
+8. [Notificaciones](#8-notificaciones)
 
 ---
 
@@ -230,7 +231,47 @@ El ícono de Reservas en la barra inferior muestra un **badge rojo** con el núm
 
 ---
 
-## 5. Configuración del negocio
+## 5. Ofertas Relámpago ⚡
+
+Las Ofertas Relámpago te permiten publicar horarios disponibles a precio especial para generar reservas inmediatas. Aparecen destacadas en la pantalla de inicio de todos los deportistas con un contador de tiempo.
+
+### Cómo crear una oferta
+
+1. Ve a **Mis Escenarios** → toca el escenario.
+2. En el header, toca el botón **⚡** (dorado, al lado del lápiz de editar).
+3. Toca **+ Nueva** y completa el formulario:
+   - **Título** — ej: "Cancha disponible esta tarde".
+   - **Fecha** — el día del horario disponible.
+   - **Desde / Hasta** — la franja horaria que quieres ofrecer.
+   - **Precio normal** — el precio habitual de esa franja.
+   - **Precio oferta** — el precio especial (debe ser menor al normal).
+   - **Duración** — cuántas horas estará visible la oferta (1h, 2h, 3h, 6h o 12h).
+4. Toca **Publicar oferta relámpago**.
+
+La oferta aparece de inmediato en la sección "Ofertas Relámpago ⚡" del inicio de la app para todos los deportistas.
+
+### Cómo ve la oferta el deportista
+
+- En la pantalla de inicio verá una card con tu escenario, el horario, el precio tachado, el precio de oferta y el tiempo restante.
+- Al entrar a reservar tu escenario, el slot con oferta activa aparece con fondo dorado y el ícono ⚡ en la esquina.
+- Al confirmar la reserva, se muestra un banner "⚡ Oferta Relámpago aplicada" con el ahorro en pesos.
+
+### Cancelar una oferta
+
+Desde la lista de ofertas del escenario, toca **Cancelar oferta** en cualquier oferta activa.
+
+### Estados de una oferta
+
+| Estado | Significado |
+|---|---|
+| ⚡ **Activa** | Visible para los deportistas, aún dentro del tiempo de validez |
+| ✅ **Reclamada** | Un deportista reservó el horario de la oferta |
+| ⏱ **Vencida** | El tiempo de validez expiró sin que nadie reservara |
+| ❌ **Cancelada** | Fue cancelada manualmente por el administrador |
+
+---
+
+## 6. Configuración del negocio
 
 1. Toca **Config** en la barra inferior.
 
@@ -269,7 +310,7 @@ Configura qué notificaciones deseas recibir:
 
 ---
 
-## 6. Perfil de administrador
+## 7. Perfil de administrador
 
 1. Toca **Perfil** en la barra inferior.
 
@@ -297,7 +338,7 @@ Toca **Cerrar sesión** al final del perfil.
 
 ---
 
-## 7. Notificaciones
+## 8. Notificaciones
 
 Toca el 🔔 en la pantalla principal para ver todas las notificaciones.
 

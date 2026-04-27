@@ -58,6 +58,7 @@ Para recuperar tu contraseña escribe a **oscardavidloradesales@gmail.com** indi
 Al entrar a la app verás la pantalla de **Inicio**, dividida en dos pestañas:
 
 ### Pestaña "Feed"
+- **⚡ Ofertas Relámpago** — si hay horarios en oferta en este momento, aparecen al tope del feed con un contador de tiempo, precio tachado y precio especial. ¡Son por tiempo limitado!
 - Publicaciones de usuarios y escenarios que sigues.
 - **Escenario Destacado** — un escenario con buena valoración cerca de ti.
 - **Profesional Destacado** — un profesional del deporte recomendado.
@@ -123,9 +124,10 @@ Al entrar a un escenario encontrarás:
 
 1. Verás los slots horarios disponibles según el horario del escenario.
 2. Los horarios **ocupados** aparecen en gris.
-3. Toca el horario que prefieres (se resalta en verde).
-4. Verás el **precio** correspondiente a esa franja.
-5. Toca **Confirmar hora**.
+3. Los horarios con **⚡ Oferta Relámpago activa** aparecen con fondo dorado, el precio original tachado y el precio especial en ámbar.
+4. Toca el horario que prefieres (se resalta en verde).
+5. Verás el **precio** correspondiente a esa franja.
+6. Toca **Confirmar hora**.
 
 ### Paso 3 — Confirmación
 
